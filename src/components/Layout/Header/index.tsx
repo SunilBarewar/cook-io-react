@@ -1,8 +1,8 @@
 import './header.css'
 import { Link, NavLink } from 'react-router-dom'
 
-import dark from "../../assets/images/logo-dark.svg"
-import light from "../../assets/images/logo-light.svg"
+import dark from "../../../assets/images/logo-dark.svg"
+import light from "../../../assets/images/logo-light.svg"
 const Header = () => {
     return (
         <>
