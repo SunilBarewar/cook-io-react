@@ -1,0 +1,84 @@
+.tab-list {
+    display: flex;
+    color: var(--on-background-variant);
+    box-shadow: inset 0 -1px 0 var(--outline);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.tab-list::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    height: 48px;
+    padding-inline: 24px;
+    border-block-end: 2px solid transparent;
+    transition: var(--transition-short);
+    flex: 1 0 80px;
+    text-transform: capitalize;
+}
+
+.tab-btn:where(:hover, :focus-visible):not(:active) {
+    background-color: var(--alpha-10);
+}
+
+.tab-btn[aria-selected="true"] {
+    color: var(--on-background);
+    border-color: var(--primary);
+}
+
+
+
+.tab .tab-list {
+    background-color: var(--background);
+    position: sticky;
+    top: var(--header-height);
+    margin-inline: -16px;
+    padding-inline: 16px;
+    margin-block: 16px 12px;
+    z-index: 1;
+}
+
+.tab-panel[hidden] {
+    display: none;
+}
+
+.tab .btn-secondary {
+    max-width: 100%;
+    margin-block-start: 12px;
+}
+
+/**
+ * responsive for larger than 600px screen
+ */
+
+@media (min-width : 600px) {
+
+    .tab .tab-list {
+        margin-inline: 0;
+        padding-inline: 0;
+    }
+
+    .tab .btn-secondary {
+        max-width: max-content;
+        margin-inline: auto;
+    }
+}
+
+/**
+ * responsive for larger than 992px screen
+ */
+
+@media (min-width : 992px) {
+
+
+    .tab .tab-list {
+        margin-block-start: 0;
+    }
+
+    .tab-btn {
+        height: 64px;
+    }
+
+}
