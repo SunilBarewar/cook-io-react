@@ -95,7 +95,18 @@
   --section-gap: 32px;
 }
 
+@media (prefers-reduced-motion : no-preference) {
 
+  :root {
+
+    /* TRANSITIONS */
+
+    --transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    --transition-short: 200ms var(--transition-timing-function);
+    --transition-medium: 500ms var(--transition-timing-function);
+  }
+
+}
 
 [data-theme="light"] {
   color-scheme: light;
@@ -306,4 +317,95 @@ main {
   font-weight: var(--weight-medium);
   line-height: 16px;
   letter-spacing: 0.5px;
+}
+
+
+
+/**
+ * responsive for larger than 600px screen
+ */
+
+@media (min-width : 600px) {
+  /**
+   * CUSTOM PROPERTY
+   */
+
+  :root {
+    /**
+    * TYPOGRAPHY
+    */
+
+    /* font size */
+
+    --fs-display-large: 3.6rem;
+    --fs-display-medium: 3.6rem;
+    --fs-display-small: 3rem;
+  }
+
+
+  /**
+   * TYPOGRAPHY
+   */
+
+  .display-large,
+  .display-medium {
+    line-height: 44px;
+  }
+
+  .display-small {
+    line-height: 36px;
+  }
+
+  .title-small {
+    font-size: 1.6rem;
+    font-weight: var(--weight-medium);
+    line-height: 24px;
+    letter-spacing: 0.15px;
+  }
+
+}
+
+/**
+ * responsive for larger than 992px screen
+ */
+
+@media (min-width : 992px) {
+  /**
+   * CUSTOM PROPERTY
+   */
+
+  :root {
+    /**
+    * TYPOGRAPHY
+    */
+
+    /* font size */
+
+    --fs-display-large: 5.7rem;
+    --fs-display-medium: 4.5rem;
+    --fs-display-small: 3.6rem;
+
+    /**
+    * OTHERs
+    */
+
+    --header-height: 80px;
+  }
+
+  /**
+    * TYPOGRAPHY
+    */
+
+  .display-large {
+    line-height: 64px;
+  }
+
+  .display-medium {
+    line-height: 52px;
+  }
+
+  .display-small {
+    line-height: 44px;
+  }
+
 }
