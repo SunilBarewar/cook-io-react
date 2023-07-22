@@ -14,7 +14,7 @@ const Home = () => {
                 {
                     cuisineTypes.map((cuisine,index) =>{
                         return (
-                            <Slider cuisineType={cuisine} index={index+1} />
+                            <Slider cuisineType={cuisine} index={index+1} key={cuisine} />
                         )
                     })
                 }
