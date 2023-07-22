@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getRecipes } from "../../api";
+import { getRecipes } from "../../utils/getRecipes";
 import "./tablist.css"
 import RecipeCard from "../RecipeCard";
 import RecipeCardSkeleton from "../RecipeCard/RecipeCardSkeleton";
-import { Recipe } from "../../interfaces/recipe";
+import { Recipe, RecipeCardProps } from "../../interfaces/recipe";
 
 
 
@@ -33,7 +33,7 @@ const cardFieldsQueries = [
 
 const TabList = () => {
     const [selectedTab, setSelectedTab] = useState(tabs[0]);
-    const [cards, setCards] = useState<Recipe[]>([])
+    const [cards, setCards] = useState<RecipeCardProps[]>([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         const fetchData = async () => {
@@ -78,9 +78,9 @@ const TabList = () => {
                                 <RecipeCardSkeleton key={index} />
                             )))
                                 : (
-                                    cards.map((card: Recipe, index) => {
+                                    cards.map((card: RecipeCardProps, index) => {
                                         return (
-                                            <RecipeCard key={card.uri} recipe={card} index={index} />
+                                            <RecipeCard key={card.recipe.uri} recipe={card.recipe} index={index} />
                                         )
                                     }))
                         }
