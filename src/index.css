@@ -323,6 +323,342 @@ main {
   scrollbar-gutter: stable;
 }
 
+/*-----------------------------------*\
+  #REUSED STYLE
+\*-----------------------------------*/
+
+.has-state {
+  position: relative;
+  overflow: hidden;
+}
+
+.has-state::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: var(--transition-short);
+}
+
+.has-state:where(:hover, :focus-visible):not(:active)::after {
+  background-color: var(--alpha-10);
+}
+
+.material-symbols-outlined {
+  display: block;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.section {
+  margin-block-end: var(--section-gap);
+}
+
+.container {
+  max-width: 1130px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+.grid-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 8px;
+}
+
+.img-holder {
+  background-color: var(--image-background);
+  background-image: url("./assets/images/image-placeholder.svg");
+  background-repeat: no-repeat;
+  background-size: 30%;
+  background-position: center;
+  overflow: hidden;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.section-title {
+  margin-block-end: 12px;
+}
+
+.snackbar-container {
+  position: fixed;
+  bottom: calc(var(--mobile-nav-height) + 16px);
+  right: 16px;
+  left: 16px;
+  display: grid;
+  gap: 8px;
+  z-index: 4;
+}
+
+.article {
+  padding: 12px;
+}
+
+
+/**
+ * Icon Button
+ */
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background-color: var(--primary-container);
+  border-radius: var(--radius-circle);
+}
+
+/**
+ * Button
+ */
+.btn {
+  height: 40px;
+  max-width: max-content;
+  padding-inline: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius-4);
+  transition: var(--transition-short);
+}
+
+.btn .material-symbols-outlined {
+  font-size: 1.8rem;
+}
+
+.btn .has-icon {
+  padding-inline-start: 16px;
+}
+
+/* primary button */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.btn-primary:where(:hover, :focus-visible):not(:active) {
+  background-color: var(--primary-hover);
+}
+
+/* secondary button */
+.btn-secondary {
+  background-color: var(--primary-container);
+}
+
+/* badge button */
+
+.badge-btn {
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background-color: var(--badge-btn);
+  color: var(--on-badge-btn);
+  max-width: max-content;
+  padding-inline: 16px;
+  display: grid;
+  place-content: center;
+  gap: 8px;
+}
+
+/* filter button */
+.btn-filter {
+  padding-inline: 12px;
+}
+
+.btn-filter .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/**
+ * Input
+ */
+.input-outlined {
+  position: relative;
+  box-shadow: inset 0 0 0 1px var(--input-outline);
+  border-radius: var(--radius-4);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  transition: var(--transition-short);
+}
+
+.input-outlined:hover {
+  box-shadow: inset 0 0 0 1px var(--input-outline-hover);
+}
+
+.input-outlined:has(:focus, input:not(:placeholder-shown)) {
+  box-shadow: inset 0 0 0 2px var(--primary);
+}
+
+.input-field {
+  height: 56px;
+  padding-inline: 16px;
+  outline: none;
+}
+
+.input-field::placeholder {
+  opacity: 0;
+  transition: var(--transition-short);
+}
+
+.input-field:focus::placeholder {
+  opacity: 1;
+}
+
+.input-outlined .label {
+  position: absolute;
+  left: 16px;
+  opacity: 0.75;
+  background-color: var(--background);
+  padding-inline: 4px;
+  margin-inline: -4px;
+  pointer-events: none;
+  transition: var(--transition-short);
+}
+
+
+.input-outlined:has(:focus, input:not(:placeholder-shown)) .label {
+  color: var(--primary);
+  transform: translateY(-27px) scale(0.75);
+  transform-origin: left center;
+  opacity: 1;
+}
+
+/**
+ * Filter chip
+ */
+.filter-chip {
+  height: 32px;
+  background-color: var(--background);
+  border: 1px solid var(--outline);
+  display: grid;
+  place-items: center;
+  padding-inline: 16px;
+  border-radius: var(--radius-8);
+  user-select: none;
+  cursor: pointer;
+}
+
+.filter-chip .checkbox {
+  appearance: none;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  opacity: 0;
+}
+
+.filter-chip:has(:focus-visible) {
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.filter-chip:has(:checked) {
+  background-color: var(--badge-btn);
+  border-color: var(--badge-btn);
+}
+
+/**
+ * Badge
+ */
+
+.badge {
+  background-color: var(--error);
+  color: var(--white);
+  height: 16px;
+  min-width: 16px;
+  padding-inline: 4px;
+  border-radius: var(--radius-pill);
+}
+
+/**
+ * Skeleton
+ */
+
+.skeleton {
+  background-color: var(--on-background);
+  animation: skeleton-loading 500ms linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton-card .card-banner {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: var(--radius-4);
+}
+
+.skeleton-card .card-title {
+  margin-block: 8px;
+  height: 16px;
+  width: 50%;
+}
+
+.skeleton-card .card-text {
+  height: 12px;
+  width: 80%;
+}
+
+
+
+
+/**
+ * Snackbar
+ */
+
+.snackbar {
+  height: 48px;
+  width: 100%;
+  background-color: var(--on-background-variant);
+  color: var(--background);
+  padding-inline: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--radius-4);
+  box-shadow: var(--shadow-1);
+  animation: snackbar 3s var(--transition-timing-function) forwards;
+}
+
+@keyframes snackbar {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+
+  10%,
+  95% {
+    height: 48px;
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+
 
 /**
  * responsive for larger than 600px screen
@@ -366,7 +702,45 @@ main {
     letter-spacing: 0.15px;
   }
 
+    /**
+   * REUSED STYLE
+   */
+
+   .container {
+    padding-inline: 32px;
+  }
+
+  .grid-list {
+    grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
+  }
+
+  .section-title {
+    margin-block-end: 24px;
+  }
+
+  .snackbar-container {
+    right: auto;
+    left: 32px;
+    max-width: 360px;
+    width: 100%;
+  }
 }
+
+
+/**
+ * responsive for larger than 768px screen
+ */
+
+ @media (min-width : 768px) {
+  /**
+   * REUSED STYLE
+   */
+
+  .snackbar-container {
+    bottom: 32px;
+  }
+}
+
 
 /**
  * responsive for larger than 992px screen
@@ -409,6 +783,22 @@ main {
 
   .display-small {
     line-height: 44px;
+  }
+
+}
+
+/**
+ * responsive for larger than 1280px screen
+ */
+
+ @media (min-width : 1280px) {
+
+  /**
+    * REUSED STYLE
+    */
+
+  .container {
+    max-width: 1280;
   }
 
 }
