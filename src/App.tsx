@@ -1,5 +1,6 @@
 import {
   createBrowserRouter,
+  Outlet,
   RouterProvider
 } from 'react-router-dom'
 import Home from './pages/Home';
@@ -21,11 +22,17 @@ function App() {
         },
         {
           path: "/recipes",
-          element: <Recipes />
-        },
-        {
-          path: "/detail",
-          element: <DetailPage />
+          element: <Outlet />,
+          children: [
+            {
+              index : true,
+              element:<Recipes />
+            },
+            {
+              path: "detail",
+              element: <DetailPage />
+            }
+          ]
         },
         {
           path: "/saved-recipes",

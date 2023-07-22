@@ -4,6 +4,7 @@ import HeroSection from '../../components/HeroSection'
 import TabList from '../../components/TabList'
 import { cuisineTypes } from '../../constants'
 import Slider from '../../components/Slider'
+import TagList from '../../components/TagList'
 const Home = () => {
     return (
         <main>
@@ -18,6 +19,7 @@ const Home = () => {
                         )
                     })
                 }
+                <TagList />
             </article>
         </main>
     )
