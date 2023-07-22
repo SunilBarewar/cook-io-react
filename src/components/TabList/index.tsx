@@ -4,10 +4,10 @@ import "./tablist.css"
 import RecipeCard from "../RecipeCard";
 import RecipeCardSkeleton from "../RecipeCard/RecipeCardSkeleton";
 import { Recipe, RecipeCardProps } from "../../interfaces/recipe";
+import { cardFieldsQueries ,tabs} from "../../constants";
 
 
 
-const tabs = ["breakfast", "lunch", "dinner", "snack", "Teatime"];
 
 type TabButtonProps = {
     mealType: string,
@@ -24,12 +24,7 @@ const TabButton: React.FC<TabButtonProps> = ({ mealType, id, setSelectedTab, sel
         </>
     )
 }
-const cardFieldsQueries = [
-    ["field", "uri"],
-    ["field", "label"],
-    ["field", "image"],
-    ["field", "totalTime"],
-]
+
 
 const TabList = () => {
     const [selectedTab, setSelectedTab] = useState(tabs[0]);
