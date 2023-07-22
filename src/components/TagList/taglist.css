@@ -1,0 +1,45 @@
+.badge-btn {
+    height: 40px;
+    border-radius: var(--radius-pill);
+    background-color: var(--badge-btn);
+    color: var(--on-badge-btn);
+    max-width: max-content;
+    padding-inline: 16px;
+    display: grid;
+    place-content: center;
+    gap: 8px;
+}
+
+.tag {
+    text-align: center;
+}
+
+.tag .section-text {
+    max-width: 50ch;
+    margin-inline: auto;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-block-start: 24px;
+}
+
+/**
+ * responsive for larger than 600px screen
+ */
+
+@media (min-width : 600px) {
+    .tab .tab-list {
+        margin-inline: 0;
+        padding-inline: 0;
+    }
+
+    .tab .btn-secondary {
+        max-width: max-content;
+        margin-inline: auto;
+    }
+}
