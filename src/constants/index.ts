@@ -1,4 +1,6 @@
-export const cardFieldsQueries = [
+import { FilterQuery } from "../interfaces/filters";
+
+export const cardFieldsQueries:FilterQuery[] = [
     ["field", "uri"],
     ["field", "label"],
     ["field", "image"],
