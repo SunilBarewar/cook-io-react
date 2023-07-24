@@ -4,10 +4,15 @@ import { Link, NavLink } from 'react-router-dom'
 import dark from "../../../assets/images/logo-dark.svg"
 import light from "../../../assets/images/logo-light.svg"
 const Header = () => {
+
+    const toggleTheme = function () {
+        const $HTML = document.documentElement;
+        $HTML.dataset.theme = $HTML.dataset.theme === 'light' ? 'dark' : 'light';
+    }
     return (
         <>
 
-            <header className="header" data-header>
+            <header className="header">
                 <Link to="/" className="logo">
                     <img src={light} alt="Cook.io" width="156" height="32" className="logo-light" />
                     <img src={dark} alt="Cook.io" width="156" height="32" className="logo-dark" />
@@ -24,8 +29,8 @@ const Header = () => {
                     </ul>
                 </nav>
 
-                <button className="icon-btn theme-switch has-state" aria-label="Toggle light and dark theme" aria-pressed="false"
-                    data-theme-btn>
+                <button className="icon-btn theme-switch has-state" aria-label="Toggle light and dark theme" onClick={toggleTheme}
+                    >
                     <span className="material-symbols-outlined light-icon" aria-hidden="true">light_mode</span>
                     <span className="material-symbols-outlined dark-icon" aria-hidden="true">dark_mode</span>
                 </button>
