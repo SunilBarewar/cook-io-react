@@ -1,11 +1,14 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import HeroSection from '../../components/HeroSection'
 import TabList from '../../components/TabList'
 import { cuisineTypes } from '../../constants'
 import Slider from '../../components/Slider'
 import TagList from '../../components/TagList'
 const Home = () => {
+    useEffect(()=>{
+        document.title = "Cook-io"
+    },[])
     return (
         <main>
             <article>

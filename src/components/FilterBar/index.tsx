@@ -1,9 +1,9 @@
 import { filters } from '../../constants/filters'
 import Accordion from './Accordion'
 import './filterbar.css'
-import { useSearchParams } from 'react-router-dom'
-import { useContext, useState } from 'react'
-import { RecipeContext } from '../../context'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import {useRef, useState } from 'react'
+
 import { FilterQuery } from '../../interfaces/filters'
 import { encodeURL } from '../../utils/encodeURL'
 type FilterBarProps = {
@@ -15,8 +15,11 @@ type Queries = {
 }
 const FilterBar = ({ active, setActive }: FilterBarProps) => {
     const [_, setSearchParams] = useSearchParams();
+    const searchQuery = useRef<HTMLInputElement>(null);
 
-    const [selectedQueries, setSelectedQueries] = useState<Queries>({})
+
+    const [selectedQueries, setSelectedQueries] = useState<Queries>({});
+
     const handleSelectedQueries = (filterType: string, queries: FilterQuery[]) => {
         setSelectedQueries((prevQueries) => {
             return {
@@ -26,10 +29,13 @@ const FilterBar = ({ active, setActive }: FilterBarProps) => {
 
         });
     }
-
+    
     const applyFilters = () => {
         // console.log(selectedQueries);
         let query = "";
+        if(searchQuery.current?.value.trim()){
+            query += `q=${searchQuery.current?.value.trim()}`;
+        }
         for (let key in selectedQueries) {
             let queries = selectedQueries[key];
             if (query)
@@ -37,11 +43,11 @@ const FilterBar = ({ active, setActive }: FilterBarProps) => {
             else
                 query += encodeURL(queries);
         }
-        // console.log(query);
-        setSearchParams(query, {replace: true});
+        
+        setSearchParams(query, { replace: true });
     }
-    const clearFilters = () =>{
-        setSearchParams("", {replace: true});
+    const clearFilters = () => {
+        setSearchParams("", { replace: true });
         setSelectedQueries({});
     }
     return (
@@ -65,8 +71,16 @@ const FilterBar = ({ active, setActive }: FilterBarProps) => {
 
                     <div className="input-outlined">
                         <label htmlFor="search" className="body-large label">Search</label>
-                        <input type="search" name="search" id="search" placeholder="Search recipes"
-                            autoComplete="off" className="input-field body-large" />
+                        <input
+                            type="search"
+                            name="search"
+                            id="search"
+                            placeholder="Search recipes"
+                            autoComplete="off"
+                            className="input-field body-large"
+                            onKeyDown={(e)=>{if(e.key === 'Enter') applyFilters()}}
+                            ref={searchQuery}
+                        />
                     </div>
 
                 </div>
