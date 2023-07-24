@@ -37,7 +37,7 @@ const TabList = () => {
                 const data = await getRecipes([...cardFieldsQueries, ["mealType", selectedTab]]);
                 setIsLoading(false);
 
-                setCards(data);
+                setCards(data.slice(0,12));
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

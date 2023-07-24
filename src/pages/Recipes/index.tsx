@@ -1,15 +1,7 @@
-import { useSearchParams } from "react-router-dom";
 import FilterBar from "../../components/FilterBar";
-import { FilterQuery } from "../../interfaces/filters";
-import { useContext, useEffect, useState } from "react";
-import { RecipeCardProps } from "../../interfaces/recipe";
-import { getRecipes } from "../../utils/getRecipes";
-import { cardFieldsQueries } from "../../constants";
+import { useState } from "react";
 import "./recipes.css"
-
-import RecipeContextProvider, { RecipeContext } from "../../context";
-import RecipeCard from "../../components/RecipeCard";
-import RecipeCardSkeleton from "../../components/RecipeCard/RecipeCardSkeleton";
+import RecipeContextProvider from "../../context";
 import RecipeContainer from "../../components/RecipeContainer";
 
 
