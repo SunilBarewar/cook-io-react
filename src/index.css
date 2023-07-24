@@ -320,7 +320,11 @@ main {
 }
 
 #root {
-  scrollbar-gutter: stable;
+
+  min-height: 100vh;
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
 }
 
 /*-----------------------------------*\
@@ -690,11 +694,11 @@ main {
     letter-spacing: 0.15px;
   }
 
-    /**
+  /**
    * REUSED STYLE
    */
 
-   .container {
+  .container {
     padding-inline: 32px;
   }
 
@@ -719,7 +723,7 @@ main {
  * responsive for larger than 768px screen
  */
 
- @media (min-width : 768px) {
+@media (min-width : 768px) {
   /**
    * REUSED STYLE
    */
@@ -779,7 +783,7 @@ main {
  * responsive for larger than 1280px screen
  */
 
- @media (min-width : 1280px) {
+@media (min-width : 1280px) {
 
   /**
     * REUSED STYLE

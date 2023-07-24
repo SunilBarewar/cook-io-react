@@ -4,6 +4,7 @@ import { getRecipeDetails } from "../../utils/getRecipeDetails";
 import { getTime } from "../../utils/getTime";
 import DetailPageSkeleton from "../../components/DetailPageSkeleton";
 import './detail.css'
+import { getRecipeById, saveRecipe } from "../../utils/saveRecipe";
 type RecipeDetailType = {
     banner: {
         url: string,
@@ -44,6 +45,12 @@ const DetailPage = () => {
     const recipeId = searchParams.get("recipe") || "";
     const [recipeDetails, setRecipeDetails] = useState<RecipeDetailType>(initRecipeDetails);
     const [loading, setLoading] = useState(true);
+    
+    const [isSaved, setIsSaved] = useState(getRecipeById(recipeId));
+    const handleSaveRecipes = async() =>{
+        const saved = await saveRecipe(recipeId);
+        setIsSaved(saved);
+    }
     const {
         banner,
         tags,
@@ -74,7 +81,6 @@ const DetailPage = () => {
                 yield: servings = 0,
                 uri
             } =await getRecipeDetails(recipeId);
-            console.log(ingredients);
             const banner = LARGE ?? REGULAR ?? SMALL ?? THUMBNAIL;
             const tags = [...cuisineType, ...dietLabels, ...dishType];
             const ingredientsLines = ingredients.map(item => item.text);
@@ -117,14 +123,14 @@ const DetailPage = () => {
                                     {/*  */}
                                     <h1 className="display-small">{title ?? "Untitled"}</h1>
 
-                                    <button className="btn btn-secondary has-state has-icon">
+                                    <button className={`btn btn-secondary has-state has-icon ${isSaved ? "saved" : "removed"}`} onClick={handleSaveRecipes}>
 
                                         <span className="material-symbols-outlined bookmark-add" aria-hidden="true">bookmark_add</span>
 
                                         <span className="material-symbols-outlined bookmark" aria-hidden="true">bookmark</span>
 
                                         <span className="label-large saved-text">Save</span>
-                                        {/* <span className="label-large unsaved-text">Unsaved</span> */}
+                                        <span className="label-large unsaved-text">Unsaved</span>
                                     </button>
 
                                 </div>
