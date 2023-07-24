@@ -2,27 +2,47 @@ import { filters } from '../../constants/filters'
 import Accordion from './Accordion'
 import './filterbar.css'
 import { useSearchParams } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { RecipeContext } from '../../context'
 import { FilterQuery } from '../../interfaces/filters'
 import { encodeURL } from '../../utils/encodeURL'
 type FilterBarProps = {
-    active : boolean
-    setActive :() => void
+    active: boolean
+    setActive: () => void
 }
+type Queries = {
+    [key: string]: FilterQuery[];
+}
+const FilterBar = ({ active, setActive }: FilterBarProps) => {
+    const [_, setSearchParams] = useSearchParams();
 
-const FilterBar = ({active, setActive}:FilterBarProps) => {
-    const {state} = useContext(RecipeContext)
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [selectedQueries, setSelectedQueries] = useState<Queries>({})
+    const handleSelectedQueries = (filterType: string, queries: FilterQuery[]) => {
+        setSelectedQueries((prevQueries) => {
+            return {
+                ...prevQueries,
+                [filterType]: queries
+            }
 
-    // let queryParamsArray: FilterQuery[] = [];
+        });
+    }
 
-    // searchParams.forEach((value, key) => {
-    //     queryParamsArray.push([key, value]);
-    // });
-    const handleApply = () =>{
-        const query =  encodeURL(state);
-        setSearchParams(query);
+    const applyFilters = () => {
+        // console.log(selectedQueries);
+        let query = "";
+        for (let key in selectedQueries) {
+            let queries = selectedQueries[key];
+            if (query)
+                query += "&" + encodeURL(queries);
+            else
+                query += encodeURL(queries);
+        }
+        // console.log(query);
+        setSearchParams(query, {replace: true});
+    }
+    const clearFilters = () =>{
+        setSearchParams("", {replace: true});
+        setSelectedQueries({});
     }
     return (
         <div className={`filter-bar ${active ? "active" : ""}`}>
@@ -52,9 +72,9 @@ const FilterBar = ({active, setActive}:FilterBarProps) => {
                 </div>
 
                 {
-                    filters.map((filter) =>{
+                    filters.map((filter) => {
                         return (
-                            <Accordion key={filter.title} {...filter} />
+                            <Accordion key={filter.title} {...filter} handleSelectedQueries={handleSelectedQueries} />
                         )
                     })
                 }
@@ -62,11 +82,11 @@ const FilterBar = ({active, setActive}:FilterBarProps) => {
 
             <div className="filter-actions">
 
-                <button className="btn btn-secondary label-large has-state">
+                <button className="btn btn-secondary label-large has-state" onClick={clearFilters}>
                     Clear
                 </button>
 
-                <button className="btn btn-primary label-large" onClick={handleApply}>
+                <button className="btn btn-primary label-large" onClick={applyFilters}>
                     Apply
                 </button>
 

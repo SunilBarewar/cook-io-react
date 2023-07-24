@@ -4,6 +4,8 @@ import "./recipeCard.css"
 import { Link } from "react-router-dom";
 const RecipeCard: React.FC<{ recipe: Recipe; index: number }> = ({ recipe, index }) => {
     const { image, label: title, totalTime: cookingTime, uri } = recipe;
+    const  recipeId = uri.slice(uri.lastIndexOf("_") + 1);
+
     const delay = `${100 * index}ms`;
     return (
         <div className="card" style={{
@@ -19,8 +21,7 @@ const RecipeCard: React.FC<{ recipe: Recipe; index: number }> = ({ recipe, index
             <div className="card-body">
 
                 <h3 className="title-small">
-                    <a href="./detail.html?recipe=${recipeId}" className="card-link">{title ?? "Untitled"}</a>
-                    {/* <Link to={`/detail`}></Link> */}
+                    <Link to={`/recipes/detail?recipe=${recipeId}`} className="card-link">{title ?? "Untitled"}</Link>
                 </h3>
 
                 <div className="meta-wrapper">

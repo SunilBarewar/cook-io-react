@@ -3,11 +3,13 @@ export type Filter ={
     title :string,
     value :string
 }
-export type AccordionProps = {
+export type FilterData = {
     title: string,
-    filter: string,
+    filterType: string,
     icon: string,
-    id: string
-    filterOptions: Filter[],
-    type: string
+    filterQueries: Filter[],
+    inputType: string,
 }
+export type AccordionProps = FilterData & {handleSelectedQueries : (filterType : string, queries:FilterQuery[]) => void}
+    
+    
