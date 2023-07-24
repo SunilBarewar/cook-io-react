@@ -1,5 +1,5 @@
 import FilterBar from "../../components/FilterBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./recipes.css"
 import RecipeContextProvider from "../../context";
 import RecipeContainer from "../../components/RecipeContainer";
@@ -12,6 +12,10 @@ const Recipes = () => {
     const toggleFilterBar = () => {
         setIsFiterBarActive(prev => !prev)
     }
+
+    useEffect(()=>{
+        document.title = "Recipes - Cookio"
+    },[])
     return (
         <>
             <RecipeContextProvider>

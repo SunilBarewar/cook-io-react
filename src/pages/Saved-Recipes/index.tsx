@@ -6,7 +6,9 @@ import RecipeCard from '../../components/RecipeCard';
 const SavedRecipes = () => {
     const [savedRecipes, setSavedRecipes] = useState<Recipe[]>([]);
     const [loading, setLoading] = useState(true);
-
+    useEffect(()=>{
+        document.title = "Saved Recipes - Cookio"
+    },[])
     useEffect(() => {
         const storedRecipesJSON = localStorage.getItem("savedRecipes");
 
