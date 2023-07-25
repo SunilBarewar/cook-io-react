@@ -1,7 +1,6 @@
 import FilterBar from "../../components/FilterBar";
 import { useEffect, useState } from "react";
 import "./recipes.css"
-import RecipeContextProvider from "../../context";
 import RecipeContainer from "../../components/RecipeContainer";
 
 
@@ -18,7 +17,7 @@ const Recipes = () => {
     },[])
     return (
         <>
-            <RecipeContextProvider>
+           
                 <main>
                     <article className="article recipe-page">
                         <FilterBar active={isFilterBarActive} setActive={toggleFilterBar} />
@@ -28,7 +27,7 @@ const Recipes = () => {
                        <RecipeContainer closeFilterBar={toggleFilterBar} />
                     </article>
                 </main>
-            </RecipeContextProvider>
+            
         </>
     )
 }

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react"
-import { AccordionProps, FilterQuery } from "../../interfaces/filters"
-import { RecipeContext } from "../../context"
+import React, { useEffect, useState } from "react"
+import { AccordionProps, Filter, FilterQuery } from "../../interfaces/filters"
 import FilterChip from "./FilterChip";
+import { useSearchParams } from "react-router-dom";
 
 
 
@@ -15,10 +15,15 @@ const Accordion: React.FC<AccordionProps> = ({
     handleSelectedQueries
   }) => {
     const [expanded, setExpanded] = useState(false);
-    
-    const [selectedFilters, setSelectedFilters] = useState<
-    FilterQuery[]>([]);
+    const [searchParams] = useSearchParams();
+    const [selectedFilters, setSelectedFilters] = useState<FilterQuery[]>([]);
 
+
+    const isChipSelected = (filterValue:string) => {
+      return selectedFilters.some((filter) => filter[1] === filterValue);
+    }
+
+  
     const updateSelectedFilters = (filterType: string, value: string, isRadio: boolean, isChecked: boolean) => {
         setSelectedFilters((prevFilters) => {
           if (isRadio) {
@@ -50,9 +55,11 @@ const Accordion: React.FC<AccordionProps> = ({
       };
 
       useEffect(()=>{
-        if(handleSelectedQueries)
+        setSelectedFilters(searchParams.getAll(filterType).map((query) => [filterType,query]));
+      },[searchParams]);
+
+      useEffect(()=>{
         handleSelectedQueries(filterType,selectedFilters);
-        // console.log(filterType,selectedFilters);
       },[selectedFilters])
     return (
       <div className="accordion-container">
@@ -71,16 +78,16 @@ const Accordion: React.FC<AccordionProps> = ({
         </button>
         <div className="accordion-content">
           <div className="accordion-overflow">
-            {filterQueries.map((item: any) => {
+            {filterQueries.map((item: Filter) => {
               return (
                 <FilterChip
                   key={item.title}
-                  title={item.title}
-                  value={item.value}
+                  {...item}
                   inputType={inputType}
                   name={inputType === "radio" ? filterType : title}
                   filterType={filterType}
                   updateSelectedFilters={updateSelectedFilters}
+                  checked={isChipSelected(item.value)} 
                 />
               );
             })}

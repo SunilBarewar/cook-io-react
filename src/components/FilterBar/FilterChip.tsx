@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 type FilterChipProps = {
     value: string,
@@ -6,6 +6,7 @@ type FilterChipProps = {
     inputType: string,
     name: string,
     filterType: string,
+    checked : boolean,
     updateSelectedFilters: (filterType: string, value: string , type : boolean,isChecked : boolean) => void
 }
 
@@ -16,12 +17,18 @@ const FilterChip: React.FC<FilterChipProps> = ({
     name,
     filterType,
     updateSelectedFilters,
+    checked
   }) => {
+    const [isChecked,setIsChecked] = useState(checked);
+   
+    useEffect(() => {
+      setIsChecked(checked);
+    }, [checked]);
+
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const isChecked = event.target.checked;
-      updateSelectedFilters(filterType,  value , inputType === "radio", isChecked);
+      updateSelectedFilters(filterType,  value , inputType === "radio", !isChecked);
+      setIsChecked(prev => !prev);
     };
-  
     return (
       <label className="filter-chip label-large">
         {title}
@@ -31,6 +38,7 @@ const FilterChip: React.FC<FilterChipProps> = ({
           value={value}
           className="checkbox"
           onChange={handleChange}
+          checked={isChecked}
         />
       </label>
     );

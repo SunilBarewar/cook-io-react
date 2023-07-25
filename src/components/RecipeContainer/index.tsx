@@ -71,7 +71,7 @@ const RecipeContainer:React.FC<{closeFilterBar:() => void}> = ({closeFilterBar})
             isLoading ? (Array.from({ length: 12 }).map((_, index) => (
                 <RecipeCardSkeleton key={index*1.28} />
             )))
-                :(
+                :(cards.length ?
             cards.map((card: RecipeCardProps, index: number) => {
                 return (
                     <RecipeCard
@@ -80,7 +80,7 @@ const RecipeContainer:React.FC<{closeFilterBar:() => void}> = ({closeFilterBar})
                         index={index}
                     />
                 )
-            }))
+            }) : <p className="body-large">No recipes found</p>)
         }
     </div>
 

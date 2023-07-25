@@ -1,7 +1,7 @@
 import { filters } from '../../constants/filters'
 import Accordion from './Accordion'
 import './filterbar.css'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import {useSearchParams } from 'react-router-dom'
 import {useRef, useState } from 'react'
 
 import { FilterQuery } from '../../interfaces/filters'
@@ -16,7 +16,6 @@ type Queries = {
 const FilterBar = ({ active, setActive }: FilterBarProps) => {
     const [_, setSearchParams] = useSearchParams();
     const searchQuery = useRef<HTMLInputElement>(null);
-
 
     const [selectedQueries, setSelectedQueries] = useState<Queries>({});
 

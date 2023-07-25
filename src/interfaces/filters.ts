@@ -10,6 +10,6 @@ export type FilterData = {
     filterQueries: Filter[],
     inputType: string,
 }
-export type AccordionProps = FilterData & {handleSelectedQueries : (filterType : string, queries:FilterQuery[]) => void}
+export type AccordionProps = FilterData & {handleSelectedQueries : (filterType : string, queries:FilterQuery[]) => void};
     
     
