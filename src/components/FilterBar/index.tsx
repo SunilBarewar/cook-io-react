@@ -44,6 +44,7 @@ const FilterBar = ({ active, setActive }: FilterBarProps) => {
         }
         
         setSearchParams(query, { replace: true });
+        setActive();
     }
     const clearFilters = () => {
         setSearchParams("", { replace: true });

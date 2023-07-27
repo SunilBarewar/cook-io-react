@@ -61,7 +61,7 @@ const RecipeContainer:React.FC<{closeFilterBar:() => void}> = ({closeFilterBar})
 
                 <span className="label-large">Filters</span>
 
-                <span className="badge label-small" data-filter-count>9</span>
+                {/* <span className="badge label-small">9</span> */}
             </div>
         </button>
     </div>
